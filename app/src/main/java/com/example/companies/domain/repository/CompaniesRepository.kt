@@ -1,6 +1,6 @@
 package com.example.companies.domain.repository
 
-import com.example.companies.domain.model.Company
+import com.example.companies.model.Company
 import retrofit2.Call
 
 interface CompaniesRepository {
