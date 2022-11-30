@@ -1,6 +1,6 @@
 package com.example.companies.data.retrofit.service
 
-import com.example.companies.domain.model.Company
+import com.example.companies.model.Company
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
