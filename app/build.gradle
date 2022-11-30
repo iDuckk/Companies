@@ -44,4 +44,7 @@ dependencies {
     //dagger2
     implementation 'com.google.dagger:dagger:2.44'
     kapt  'com.google.dagger:dagger-compiler:2.44'
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
