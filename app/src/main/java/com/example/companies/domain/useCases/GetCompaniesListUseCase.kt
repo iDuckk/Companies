@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GetCompaniesListUseCase@Inject constructor(private val repo : CompaniesRepository) {
 
-    operator fun invoke() = repo.getListCompanies()
+    suspend operator fun invoke() = repo.getListCompanies()
 
 }

@@ -1,13 +1,12 @@
 package com.example.companies.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.example.companies.domain.model.Company
 import retrofit2.Call
 
 interface CompaniesRepository {
 
-    suspend fun getCompany(id : Int) : Call<List<Company>>
+    suspend fun getCompany(id : Int) : Call<Company>
 
-    fun getListCompanies() : LiveData<List<Company>>
+    suspend fun getListCompanies() : Call<List<Company>>
 
 }
