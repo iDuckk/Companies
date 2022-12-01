@@ -7,6 +7,8 @@ import com.example.companies.databinding.ItemCompanyBinding
 import com.example.companies.model.Company
 import javax.inject.Inject
 
+var onClickListenerItem: ((item: Int) -> Unit)? = null
+
 class CompaniesAdapter @Inject constructor() :
     ListAdapter<Company, CompaniesViewHolder>(CompaniesCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompaniesViewHolder {
@@ -23,6 +25,10 @@ class CompaniesAdapter @Inject constructor() :
         val item = getItem(position)
 
         holder.name.text = item.name
+
+        holder.itemView.setOnClickListener {
+            onClickListenerItem?.invoke(item.id)
+        }
     }
 }
 

@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
 import com.example.companies.databinding.FragmentListCompanyBinding
 import com.example.companies.model.Company
 import com.example.companies.presentation.adapters.companiesAdapter.CompaniesAdapter
+import com.example.companies.presentation.adapters.companiesAdapter.onClickListenerItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +27,6 @@ class ListCompanyFragment : Fragment() {
 
     @Inject
     lateinit var companiesAdapter: CompaniesAdapter
-
     @Inject
     lateinit var viewModel: ListCompaniesViewModel
 
@@ -53,6 +55,10 @@ class ListCompanyFragment : Fragment() {
         setListCompanies()
     }
 
+    companion object {
+        private val ID_COMPANY_KEY = "id_company_key"
+    }
+
     private fun setListCompanies() {
         //Get list
         viewModel.getCompaniesList()
@@ -73,6 +79,15 @@ class ListCompanyFragment : Fragment() {
                 false
             )
             adapter = companiesAdapter
+
+            onClickListenerItem = { id ->
+                bundleOf(ID_COMPANY_KEY to id).let {
+                    findNavController().navigate(
+                        R.id.action_listCompanyFragment_to_detailsCompanyFragment,
+                        it
+                    )
+                }
+            }
         }
     }
 
