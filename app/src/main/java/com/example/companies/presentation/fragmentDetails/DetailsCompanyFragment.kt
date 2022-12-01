@@ -14,6 +14,7 @@ import com.example.companies.databinding.FragmentDetailsCompanyBinding
 import com.example.companies.databinding.FragmentListCompanyBinding
 import com.example.companies.presentation.adapters.companiesAdapter.onClickListenerItem
 import com.example.companies.presentation.fragmentList.ListCompaniesViewModel
+import com.example.companies.utils.InterfaceMainActivity
 import javax.inject.Inject
 
 class DetailsCompanyFragment : Fragment() {
@@ -23,6 +24,10 @@ class DetailsCompanyFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: DetailsCompanyViewModel
+
+    private val mActivity by lazy {
+        (context as InterfaceMainActivity)
+    }
 
     private val component by lazy {
         (requireActivity().application as CompaniesApplication).component
@@ -44,20 +49,38 @@ class DetailsCompanyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Visible Back arrow
+        mActivity.visibilityArrowBack(true)
+
         setContent()
+
+        listenerActionBarViews()
 
     }
 
     companion object {
         const val ID_COMPANY_KEY = "id_company_key"
+        const val NAME_COMPANY_KEY = "name_company_key"
         const val ZERO = 0.0
         const val EMPTY = ""
         const val IMAGE_URL = "https://lifehack.studio/test_task/"
     }
 
+    private fun listenerActionBarViews() {
+        (context as InterfaceMainActivity).arrowBack().setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
     private fun setContent() {
         arguments?.getInt(ID_COMPANY_KEY).let {
             viewModel.getCompany(it!!)
+        }
+        arguments?.getString(NAME_COMPANY_KEY).let {
+            if(!it.isNullOrEmpty())
+                mActivity.setTextActionBar(it)
+            else
+                mActivity.setTextActionBar("")
         }
 
         viewModel.dCompany.observe(viewLifecycleOwner) {

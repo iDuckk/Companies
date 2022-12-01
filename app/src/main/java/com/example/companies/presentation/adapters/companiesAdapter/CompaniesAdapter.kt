@@ -10,7 +10,7 @@ import com.example.companies.model.Company
 import com.example.companies.presentation.fragmentDetails.DetailsCompanyFragment
 import javax.inject.Inject
 
-var onClickListenerItem: ((item: Int) -> Unit)? = null
+var onClickListenerItem: ((item: Company) -> Unit)? = null
 const val IMAGE_URL = "https://lifehack.studio/test_task/"
 
 class CompaniesAdapter @Inject constructor() :
@@ -38,7 +38,7 @@ class CompaniesAdapter @Inject constructor() :
             .into(holder.img)
 
         holder.itemView.setOnClickListener {
-            onClickListenerItem?.invoke(item.id)
+            onClickListenerItem?.invoke(item)
         }
     }
 }
