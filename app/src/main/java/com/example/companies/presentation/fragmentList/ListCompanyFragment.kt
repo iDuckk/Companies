@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
 import com.example.companies.databinding.FragmentListCompanyBinding
 import com.example.companies.model.Company
 import com.example.companies.presentation.adapters.companiesAdapter.CompaniesAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListCompanyFragment : Fragment() {
@@ -20,6 +24,9 @@ class ListCompanyFragment : Fragment() {
 
     @Inject
     lateinit var companiesAdapter: CompaniesAdapter
+
+    @Inject
+    lateinit var viewModel: ListCompaniesViewModel
 
     private val component by lazy {
         (requireActivity().application as CompaniesApplication).component
@@ -42,16 +49,29 @@ class ListCompanyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecView()
+
+        setListCompanies()
     }
 
-    companion object {
-
+    private fun setListCompanies() {
+        //Get list
+        viewModel.getCompaniesList()
+        //Set list
+        viewModel.companiesList.observe(viewLifecycleOwner) {
+            companiesAdapter.submitList(it)
+        }
+        //Emit error
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initRecView() {
-        with(binding.recViewCompanies){
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
-                false)
+        with(binding.recViewCompanies) {
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL,
+                false
+            )
             adapter = companiesAdapter
         }
     }
