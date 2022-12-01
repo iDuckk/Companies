@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_list_company" >
         <action
             android:id="@+id/action_listCompanyFragment_to_detailsCompanyFragment"
-            app:destination="@id/detailsCompanyFragment" />
+            app:destination="@id/detailsCompanyFragment"
+            app:launchSingleTop="false" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/detailsCompanyFragment"
