@@ -52,6 +52,7 @@ class DetailsCompanyFragment : Fragment() {
         const val ID_COMPANY_KEY = "id_company_key"
         const val ZERO = 0.0
         const val EMPTY = ""
+        const val IMAGE_URL = "https://lifehack.studio/test_task/"
     }
 
     private fun setContent() {
@@ -59,34 +60,31 @@ class DetailsCompanyFragment : Fragment() {
             viewModel.getCompany(it!!)
         }
 
-        viewModel.dCompany.observe(viewLifecycleOwner){
-//            Glide
-//                .with(requireContext())
-//                .load(item.img)
-//                .error(R.drawable.ic_android)
-//                .into(binding.imLogo)
-
+        viewModel.dCompany.observe(viewLifecycleOwner) {
+            //Set Image
+            Glide
+                .with(requireContext())
+                .load("$IMAGE_URL${it.img}")
+                .error(R.drawable.ic_android)
+                .into(binding.imLogo)
+            //Set text views
             binding.tvNameDetail.text = it.name
             binding.tvDesc.text = it.description
-
-            if(it.www != EMPTY)
-                binding.tvWww.text = it.www else binding.tvWww.visibility = View.GONE
-
-            if(it.phone != EMPTY)
-                binding.tvPhone.text = it.phone else binding.tvPhone.visibility = View.GONE
-
-            if(it.lat != ZERO || it.lon != ZERO) {
+            binding.tvWww.text = it.www
+            binding.tvPhone.text = it.phone
+            //Set visibility of lat, lon
+            if (it.lat != ZERO || it.lon != ZERO) {
                 binding.tvLatContent.text = it.lat.toString()
                 binding.tvLonContent.text = it.lon.toString()
-            }else{
-                binding.tvLatContent.visibility = View.GONE
-                binding.tvLonContent.visibility = View.GONE
-                binding.tvLat.visibility = View.GONE
-                binding.tvLon.visibility = View.GONE
+            } else {
+                binding.tvLatContent.visibility = View.INVISIBLE
+                binding.tvLonContent.visibility = View.INVISIBLE
+                binding.tvLat.visibility = View.INVISIBLE
+                binding.tvLon.visibility = View.INVISIBLE
             }
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner){
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }

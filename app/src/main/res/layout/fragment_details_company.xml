@@ -24,8 +24,8 @@
                 android:id="@+id/im_logo"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:padding="5sp"
-                android:minHeight="96sp"
+                android:padding="3sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,8 @@
                 android:id="@+id/tv_name_detail"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:padding="5sp"
+                android:padding="3sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,8 +53,8 @@
                 android:id="@+id/tv_lat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="3sp"
                 android:text="@string/latitude"
-                android:padding="5sp"
                 app:layout_constraintStart_toEndOf="@+id/im_logo"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
 
@@ -61,7 +62,7 @@
                 android:id="@+id/tv_lat_content"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:padding="5sp"
+                android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_lon"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name_detail"
@@ -71,8 +72,8 @@
                 android:id="@+id/tv_lon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="3sp"
                 android:text="@string/longitude"
-                android:padding="5sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/tv_lat" />
 
@@ -80,32 +81,32 @@
                 android:id="@+id/tv_lon_content"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                tools:text="amount"
-                android:padding="5sp"
+                android:padding="3sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_www"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_lon"
-                app:layout_constraintTop_toBottomOf="@+id/tv_lat_content" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_lat_content"
+                tools:text="amount" />
 
             <TextView
                 android:id="@+id/tv_www"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                tools:text="web"
-                android:padding="5sp"
+                android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_lon" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_lon"
+                tools:text="web" />
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                tools:text="phone"
-                android:padding="5sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_www" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_www"
+                tools:text="phone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,7 +114,7 @@
             android:id="@+id/scroll_desc"
             android:layout_width="match_parent"
             android:layout_height="0sp"
-            android:padding="5sp"
+            android:padding="3sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +128,7 @@
                     android:id="@+id/tv_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5sp"
+                    android:padding="3sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
