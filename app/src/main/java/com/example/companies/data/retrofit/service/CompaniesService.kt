@@ -7,10 +7,10 @@ import retrofit2.http.Path
 
 interface CompaniesService {
 
-    @GET("{?id}")
+    @GET("{test.php/?id}")
     fun getCompany(@Path("id") id: Int): Call<Company>
 
-    @GET()
+    @GET("test.php/")
     fun getListCompanies(): Call<List<Company>>
 
 }

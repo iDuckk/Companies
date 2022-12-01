@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
     private val client = OkHttpClient.Builder().build()
-    private val BASE_URL = "https://lifehack.studio/test_task/test.php/"
+    private val BASE_URL = "https://lifehack.studio/test_task/"
 
     fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(BASE_URL)
