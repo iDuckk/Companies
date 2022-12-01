@@ -6,8 +6,8 @@ data class DetailsCompany(
     val name: String,
     val img: String,
     val description: String,
-    val lat: Double,
-    val lon: Double,
-    val www: String,
-    val phone: String
+    val lat: Double, //Latitude
+    val lon: Double, //Longitude
+    val www: String, //Website
+    val phone: String //Phone
 )
