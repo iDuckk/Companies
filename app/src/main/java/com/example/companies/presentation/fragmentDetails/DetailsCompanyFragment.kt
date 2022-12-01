@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
 import com.example.companies.databinding.FragmentDetailsCompanyBinding
 import com.example.companies.databinding.FragmentListCompanyBinding
+import com.example.companies.presentation.adapters.companiesAdapter.onClickListenerItem
 import com.example.companies.presentation.fragmentList.ListCompaniesViewModel
 import javax.inject.Inject
 
@@ -47,7 +49,9 @@ class DetailsCompanyFragment : Fragment() {
     }
 
     companion object {
-        private val ID_COMPANY_KEY = "id_company_key"
+        const val ID_COMPANY_KEY = "id_company_key"
+        const val ZERO = 0.0
+        const val EMPTY = ""
     }
 
     private fun setContent() {
@@ -56,12 +60,34 @@ class DetailsCompanyFragment : Fragment() {
         }
 
         viewModel.dCompany.observe(viewLifecycleOwner){
-            binding.tvNameDettail.text = it.description
+//            Glide
+//                .with(requireContext())
+//                .load(item.img)
+//                .error(R.drawable.ic_android)
+//                .into(binding.imLogo)
+
+            binding.tvNameDetail.text = it.name
+            binding.tvDesc.text = it.description
+
+            if(it.www != EMPTY)
+                binding.tvWww.text = it.www else binding.tvWww.visibility = View.GONE
+
+            if(it.phone != EMPTY)
+                binding.tvPhone.text = it.phone else binding.tvPhone.visibility = View.GONE
+
+            if(it.lat != ZERO || it.lon != ZERO) {
+                binding.tvLatContent.text = it.lat.toString()
+                binding.tvLonContent.text = it.lon.toString()
+            }else{
+                binding.tvLatContent.visibility = View.GONE
+                binding.tvLonContent.visibility = View.GONE
+                binding.tvLat.visibility = View.GONE
+                binding.tvLon.visibility = View.GONE
+            }
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner){
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            Log.d("TAG", it)
         }
     }
 
