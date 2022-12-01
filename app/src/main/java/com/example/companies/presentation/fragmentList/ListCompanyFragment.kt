@@ -12,12 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
 import com.example.companies.databinding.FragmentListCompanyBinding
-import com.example.companies.model.Company
 import com.example.companies.presentation.adapters.companiesAdapter.CompaniesAdapter
 import com.example.companies.presentation.adapters.companiesAdapter.onClickListenerItem
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.companies.utils.InterfaceMainActivity
 import javax.inject.Inject
 
 class ListCompanyFragment : Fragment() {
@@ -30,6 +27,10 @@ class ListCompanyFragment : Fragment() {
     @Inject
     lateinit var viewModel: ListCompaniesViewModel
 
+    private val mActivity by lazy {
+        (context as InterfaceMainActivity)
+    }
+
     private val component by lazy {
         (requireActivity().application as CompaniesApplication).component
     }
@@ -37,6 +38,7 @@ class ListCompanyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -56,7 +58,8 @@ class ListCompanyFragment : Fragment() {
     }
 
     companion object {
-        private val ID_COMPANY_KEY = "id_company_key"
+        const val ID_COMPANY_KEY = "id_company_key"
+        const val NAME_COMPANY_KEY = "name_company_key"
     }
 
     private fun setListCompanies() {
@@ -80,8 +83,8 @@ class ListCompanyFragment : Fragment() {
             )
             adapter = companiesAdapter
 
-            onClickListenerItem = { id ->
-                bundleOf(ID_COMPANY_KEY to id).let {
+            onClickListenerItem = { item ->
+                bundleOf(ID_COMPANY_KEY to item.id , NAME_COMPANY_KEY to item.name).let {
                     findNavController().navigate(
                         R.id.action_listCompanyFragment_to_detailsCompanyFragment,
                         it
@@ -89,6 +92,14 @@ class ListCompanyFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Set Action Bar name
+        mActivity.setTextActionBar(requireActivity().getString(R.string.app_name))
+        //Gone Back arrow
+        mActivity.visibilityArrowBack(false)
     }
 
     override fun onDestroyView() {
