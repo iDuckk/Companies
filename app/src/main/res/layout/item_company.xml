@@ -14,23 +14,23 @@
             android:id="@+id/tv_name"
             android:layout_width="0sp"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/im_arrow"
             android:textSize="22sp"
-            android:padding="3sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:padding="2sp"
+            tools:text="name"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="name" />
-
-        <ImageView
-            android:id="@+id/im_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/im_l"/>
+
+        <ImageView
+            android:id="@+id/im_l"
+            android:layout_width="24sp"
+            android:layout_height="36sp"
             android:padding="2sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_name"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@+id/tv_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
