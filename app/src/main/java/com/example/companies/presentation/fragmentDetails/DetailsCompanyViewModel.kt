@@ -1,10 +1,10 @@
-package com.example.companies.presentation.fragmentList
+package com.example.companies.presentation.fragmentDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.companies.domain.useCases.GetCompaniesListUseCase
-import com.example.companies.model.Company
+import com.example.companies.domain.useCases.GetCompany
+import com.example.companies.model.DetailsCompany
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,28 +13,28 @@ import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 
-class ListCompaniesViewModel @Inject constructor(
-    private val getList: GetCompaniesListUseCase
-): ViewModel(){
+class DetailsCompanyViewModel@Inject constructor(
+    private val getCompany: GetCompany
+): ViewModel() {
 
     var job: Job? = null
 
-    private val _companiesList = MutableLiveData<List<Company>>()
-    val companiesList: LiveData<List<Company>>
-        get() = _companiesList
+    private val _dCompany = MutableLiveData<DetailsCompany>()
+    val dCompany: LiveData<DetailsCompany>
+        get() = _dCompany
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    fun getCompaniesList(){
+    fun getCompany(id: Int){
         job = CoroutineScope(Dispatchers.IO).launch {
-            getList.invoke().enqueue(object: retrofit2.Callback<List<Company>>{
-                override fun onResponse(call: Call<List<Company>>, response: Response<List<Company>>) {
+            getCompany.invoke(id).enqueue(object: retrofit2.Callback<List<DetailsCompany>>{
+                override fun onResponse(call: Call<List<DetailsCompany>>, response: Response<List<DetailsCompany>>) {
                     //Get data
-                    _companiesList.postValue(response.body())
+                    _dCompany.postValue(response.body()!!.get(0))
                 }
 
-                override fun onFailure(call: Call<List<Company>>, t: Throwable) {
+                override fun onFailure(call: Call<List<DetailsCompany>>, t: Throwable) {
                     _errorMessage.postValue("ListCompaniesViewModel: ${t.message}")
                 }
 
