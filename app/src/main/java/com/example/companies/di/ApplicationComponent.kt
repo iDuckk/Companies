@@ -1,6 +1,7 @@
 package com.example.companies.di
 
 import android.app.Application
+import com.example.companies.presentation.fragmentDetails.DetailsCompanyFragment
 import com.example.companies.presentation.fragmentList.ListCompanyFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -10,6 +11,8 @@ import dagger.Component
 interface ApplicationComponent {
 
     fun inject(fragment: ListCompanyFragment)
+
+    fun inject(fragment: DetailsCompanyFragment)
 
     @Component.Factory
     interface Factory{
