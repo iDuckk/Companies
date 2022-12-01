@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
@@ -68,7 +69,8 @@ class DetailsCompanyFragment : Fragment() {
 
     private fun listenerActionBarViews() {
         (context as InterfaceMainActivity).arrowBack().setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().navigate(
+                R.id.action_detailsCompanyFragment_to_listCompanyFragment)
         }
     }
 
