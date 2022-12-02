@@ -5,17 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.companies.domain.useCases.GetCompany
 import com.example.companies.model.DetailsCompany
+import com.example.companies.utils.ParseJSON
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 
+
 class DetailsCompanyViewModel@Inject constructor(
     private val getCompany: GetCompany
 ): ViewModel() {
+
+    @Inject
+    lateinit var parseJSON: ParseJSON
 
     var job: Job? = null
 
@@ -28,18 +34,24 @@ class DetailsCompanyViewModel@Inject constructor(
 
     fun getCompany(id: Int){
         job = CoroutineScope(Dispatchers.IO).launch {
-            getCompany.invoke(id).enqueue(object: retrofit2.Callback<List<DetailsCompany>>{
-                override fun onResponse(call: Call<List<DetailsCompany>>, response: Response<List<DetailsCompany>>) {
-                    //Get data
-                    _dCompany.postValue(response.body()!!.get(0))
+            getCompany.invoke(id).enqueue(object: retrofit2.Callback<ResponseBody>{
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+
+                    val stringResponse = response.body()?.string() //Сырой JSON строкой
+
+                    _dCompany.postValue(parseJSON.invoke(stringResponse!!))
                 }
 
-                override fun onFailure(call: Call<List<DetailsCompany>>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     _errorMessage.postValue("ListCompaniesViewModel: ${t.message}")
                 }
 
             })
         }
+    }
+
+    companion object{
+        const val ESCAPING_QUOTES = "\\"
     }
 
     override fun onCleared() {

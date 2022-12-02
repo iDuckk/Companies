@@ -12,9 +12,6 @@ import com.bumptech.glide.Glide
 import com.example.companies.CompaniesApplication
 import com.example.companies.R
 import com.example.companies.databinding.FragmentDetailsCompanyBinding
-import com.example.companies.databinding.FragmentListCompanyBinding
-import com.example.companies.presentation.adapters.companiesAdapter.onClickListenerItem
-import com.example.companies.presentation.fragmentList.ListCompaniesViewModel
 import com.example.companies.utils.InterfaceMainActivity
 import javax.inject.Inject
 
@@ -111,6 +108,7 @@ class DetailsCompanyFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            Log.d("TAG", it)
         }
     }
 
