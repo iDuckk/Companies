@@ -62,6 +62,7 @@ class DetailsCompanyFragment : Fragment() {
         const val ZERO = 0.0
         const val EMPTY = ""
         const val IMAGE_URL = "https://lifehack.studio/test_task/"
+        const val NONE = "none"
     }
 
     private fun listenerActionBarViews() {
@@ -92,23 +93,18 @@ class DetailsCompanyFragment : Fragment() {
             //Set text views
             binding.tvNameDetail.text = it.name
             binding.tvDesc.text = it.description
-            binding.tvWww.text = it.www
-            binding.tvPhone.text = it.phone
-            //Set visibility of lat, lon
-            if (it.lat != ZERO || it.lon != ZERO) {
-                binding.tvLatContent.text = it.lat.toString()
-                binding.tvLonContent.text = it.lon.toString()
-            } else {
-                binding.tvLatContent.visibility = View.INVISIBLE
-                binding.tvLonContent.visibility = View.INVISIBLE
-                binding.tvLat.visibility = View.INVISIBLE
-                binding.tvLon.visibility = View.INVISIBLE
-            }
+            //set WWW
+            if(it.www.isNotEmpty()) binding.tvWww.text = it.www else binding.tvWww.text = NONE
+            //Set Phone number
+            if(it.phone.isNotEmpty()) binding.tvPhone.text = it.phone else binding.tvPhone.text = NONE
+            //Set lat, lon
+            binding.tvLatContent.text = it.lat.toString()
+            binding.tvLonContent.text = it.lon.toString()
+
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            Log.d("TAG", it)
         }
     }
 

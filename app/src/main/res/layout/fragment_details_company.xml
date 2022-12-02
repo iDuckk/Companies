@@ -25,7 +25,6 @@
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:padding="3sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:padding="3sp"
                 android:text="@string/latitude"
+                android:textStyle="italic"
                 app:layout_constraintStart_toEndOf="@+id/im_logo"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
 
@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:padding="3sp"
                 android:text="@string/longitude"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/tv_lat" />
 
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toEndOf="@+id/tv_lon"
                 app:layout_constraintTop_toBottomOf="@+id/tv_lon"
                 tools:text="web" />
 
@@ -104,9 +105,29 @@
                 android:layout_height="wrap_content"
                 android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/tv_www"
                 app:layout_constraintTop_toBottomOf="@+id/tv_www"
                 tools:text="phone" />
+
+            <TextView
+                android:id="@+id/tv_title_www"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3sp"
+                android:text="@string/website"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@+id/im_logo"
+                app:layout_constraintTop_toBottomOf="@+id/tv_lon" />
+
+            <TextView
+                android:id="@+id/tv_title_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3sp"
+                android:text="@string/phone"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_www" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
