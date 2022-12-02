@@ -34,6 +34,7 @@ class CompaniesAdapter @Inject constructor() :
         Glide
             .with(holder.itemView.context)
             .load("${IMAGE_URL}${item.img}")
+            .circleCrop()
             .error(R.drawable.ic_android)
             .into(holder.img)
 
